@@ -62,7 +62,7 @@ export class BookSearchComponent implements OnInit {
 
   ontypeSearchBook(){
     setTimeout(()=>{
-      this.searchBooks();
+      this.searchBooks();  // make call to api for result after 500ms
     },500)
   }
 }

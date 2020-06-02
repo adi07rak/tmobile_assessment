@@ -27,7 +27,7 @@ describe('When: Use the search feature', () => {
     const input = await $('input[type="search"]');
     await input.sendKeys('harrypotter');
     
-    const items = await $$('[data-testing="book-item"]');
-    expect(items.length).to.be.greaterThan(1, 'At least one book');
+    const items = await $$('[data-testing="book-item"]');           // on type getting results
+    expect(items.length).to.be.greaterThan(1, 'At least one book'); // got result
   });
 });
