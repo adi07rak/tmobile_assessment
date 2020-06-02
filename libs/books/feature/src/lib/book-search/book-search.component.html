@@ -16,7 +16,7 @@
 <!-- <ng-container *ngIf="searchTerm; else empty"> -->
   <ng-container *ngIf="books.length!== 0; else empty">
   <div class="book-grid">
-    <div class="book" data-testing="book-item" *ngFor="let b of books">
+    <div class="book" data-testing="book-item" *ngFor="let b of books; let i = index;">
       <div class="book--title">
         {{ b.title }}
       </div>
@@ -37,6 +37,7 @@
               color="primary"
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
+              id="{{i}}button"
             >
               Want to Read
             </button>
