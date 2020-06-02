@@ -14,7 +14,7 @@ describe('Books Reducer', () => {
 
     beforeEach(() => {
       state = readingListAdapter.setAll(
-        [createReadingListItem('A'), createReadingListItem('B')],
+        [createReadingListItem('A'), createReadingListItem('B'), createReadingListItem('C')],
         initialState
       );
     });
@@ -30,7 +30,7 @@ describe('Books Reducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).to.be.true;
-      expect(result.ids.length).to.eq(3);
+      expect(result.ids.length).to.eql(3);
     });
 
     it('failedAddToReadingList should undo book addition to the state', () => {
@@ -40,7 +40,7 @@ describe('Books Reducer', () => {
 
       const result: State = reducer(state, action);
 
-      expect(result.ids).to.eql(['A']);
+      expect(result.ids).to.eql(['A','B','C']);
     });
 
     it('failedRemoveFromReadingList should undo book removal from the state', () => {
