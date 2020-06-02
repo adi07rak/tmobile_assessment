@@ -59,4 +59,10 @@ export class BookSearchComponent implements OnInit {
       this.store.dispatch(clearSearch());
     }
   }
+
+  ontypeSearchBook(){
+    setTimeout(()=>{
+      this.searchBooks();
+    },500)
+  }
 }
