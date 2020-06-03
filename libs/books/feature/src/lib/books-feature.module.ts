@@ -11,6 +11,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TotalCountComponent } from './total-count/total-count.component';
 import { ReadingListComponent } from './reading-list/reading-list.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const EXPORTS = [
   BookSearchComponent,
@@ -31,7 +32,8 @@ const EXPORTS = [
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: BookSearchComponent }
     ]),
-    BooksDataAccessModule
+    BooksDataAccessModule,
+    MatProgressBarModule
   ],
   exports: [...EXPORTS],
   declarations: [...EXPORTS]

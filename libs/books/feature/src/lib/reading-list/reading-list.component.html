@@ -8,6 +8,12 @@
       <div class="reading-list-item--details--author">
         {{ b.authors.join(',') }}
       </div>
+      <div class="reading-list-item--details--author" *ngIf="barvalue!== 100">
+        <mat-progress-bar mode="determinate" [value]="barvalue" [color]="color"></mat-progress-bar>
+      </div>
+      <div class="reading-list-item--details--author">
+        <button (click)="finishStatus(b)">Finish</button>
+      </div>
     </div>
     <div>
       <button
