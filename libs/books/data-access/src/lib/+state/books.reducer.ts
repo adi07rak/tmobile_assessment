@@ -44,5 +44,6 @@ const booksReducer = createReducer(
 );
 
 export function reducer(state: State | undefined, action: Action) {
+  console.log('checking at reducer:::', state, action);
   return booksReducer(state, action);
 }
