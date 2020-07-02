@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   addToReadingList,
@@ -9,6 +9,13 @@ import {
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';
+import { Observable, fromEvent } from 'rxjs';
+import {
+  debounceTime,
+  map,
+  distinctUntilChanged,
+  filter
+} from "rxjs/operators";
 
 @Component({
   selector: 'tmo-book-search',
@@ -17,11 +24,11 @@ import { Book } from '@tmo/shared/models';
 })
 export class BookSearchComponent implements OnInit {
   books: ReadingListBook[];
-
+  @ViewChild('bookSearchInput', { static: true }) bookSearchInput: ElementRef;
   searchForm = this.fb.group({
     term: ''
   });
-
+  
   constructor(
     private readonly store: Store,
     private readonly fb: FormBuilder
@@ -35,6 +42,18 @@ export class BookSearchComponent implements OnInit {
     this.store.select(getAllBooks).subscribe(books => {
       this.books = books;
     });
+
+    fromEvent(this.bookSearchInput.nativeElement, 'keyup').pipe(
+      map((event: any) => {
+        return event.target.value;
+      }),
+      debounceTime(1000),
+      distinctUntilChanged()
+    ).subscribe((text: string) => {
+        console.log('::::', text);  
+        this.searchBooks();
+    });
+
   }
 
   formatDate(date: void | string) {
@@ -58,11 +77,11 @@ export class BookSearchComponent implements OnInit {
     } else {
       this.store.dispatch(clearSearch());
     }
-  }
+  } 
 
-  ontypeSearchBook(){
-    setTimeout(()=>{
-      this.searchBooks();  // make call to api for result after 500ms
-    },500)
-  }
+  // ontypeSearchBook(){
+  //   setTimeout(()=>{
+  //     this.searchBooks();  // make call to api for result after 500ms
+  //   },500)
+  // }
 }
